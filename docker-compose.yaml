@@ -1,4 +1,14 @@
-version: "3.9"
+version: "3.8"
+
+volumes:
+  postgres_data:
+  mongo_vol:
+
+networks:
+  net_app:
+    driver: bridge
+  net_int:
+    driver: bridge
 
 services:
   postgres:
@@ -72,14 +82,3 @@ services:
     restart: always
     depends_on:
       - mongodb
-      
-
-volumes:
-  postgres_data:
-  mongo_vol:
-
-networks:
-  net_app:
-    driver: bridge
-  net_int:
-    driver: bridge
