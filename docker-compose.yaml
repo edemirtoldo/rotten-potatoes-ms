@@ -2,11 +2,10 @@ version: "3.9"
 
 services:
   postgres:
-    #image: postgres:14.0
     image: postgres:13.4-alpine
     environment:
-      POSTGRES_USER: ${pg_user}
-      POSTGRES_PASSWORD: ${pg_passwd}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWD}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -15,11 +14,11 @@ services:
       - "5432:5432"
 
   mongodb:
-    #image: mongo:4.4.3
+
     image: mongo:5.0
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${mongouser}
-      MONGO_INITDB_ROOT_PASSWORD: ${mongopwd}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PWD}
     volumes:
       - mongo_vol:/data/db
     networks:
@@ -28,7 +27,7 @@ services:
       - "27017:27017"
 
   app-rotten-potatoes:
-    image: rotten_potatoes_ms:${TAG}
+    image: edemirtoldo/rotten_potatoes_ms:${TAG}
     hostname: app-rotten-potatoes
     build:
       context: ./src
@@ -45,13 +44,13 @@ services:
       - "8080:5000"
   
   app-review:
-    image: review:${TAG}
+    image: edemirtoldo/review:${TAG}
     hostname: app-review
     build:
       context: ../review/src/Review.Web/
       dockerfile: Dockerfile
     environment:
-      - ConnectionStrings__MyConnection=${connection_string_pg}
+      - ConnectionStrings__MyConnection=${CONNECTION_STRING_PG}
     networks:
       - net_int
       - net_app
@@ -60,7 +59,7 @@ services:
       - postgres
 
   app-movie:
-    image: movie:${TAG}
+    image: edemirtoldo/movie:${TAG}
     hostname: app-movie
     build:
       context: ../movie/src/
