@@ -1,6 +1,6 @@
 # Projeto Rotten Tomatoes Microsserviços
 
-Aplicação escrita em python com filmes com a opção de cadastrar resenhas de cada filme.
+Aplicação escrita em python com lista de filmes e opção de cadastrar resenhas.
 
 ## Estrutura do projeto
 
